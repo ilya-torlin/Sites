@@ -1,0 +1,10 @@
+[Sun Jun 10 01:13:23.099544 2018] [authz_core:error] [pid 88413] [client 127.0.0.1:58618] AH01630: client denied by server configuration: /Users/ilyatorlin/Sites/api.testwork.home/
+[Sun Jun 10 01:13:23.279769 2018] [authz_core:error] [pid 88413] [client 127.0.0.1:58618] AH01630: client denied by server configuration: /Users/ilyatorlin/Sites/api.testwork.home/favicon.ico, referer: http://testwork.home/
+[Wed Jun 13 20:39:07.296652 2018] [authz_core:error] [pid 6393] [client 127.0.0.1:51006] AH01630: client denied by server configuration: /Users/ilyatorlin/Sites/api.testwork.home/
+[Wed Jun 13 20:39:07.562350 2018] [authz_core:error] [pid 6393] [client 127.0.0.1:51006] AH01630: client denied by server configuration: /Users/ilyatorlin/Sites/api.testwork.home/favicon.ico, referer: http://api.testwork.home/
+[Wed Jun 13 20:43:04.577037 2018] [authz_core:error] [pid 6417] [client 127.0.0.1:51115] AH01630: client denied by server configuration: /Users/ilyatorlin/Sites/api.testwork.home/
+[Wed Jun 13 20:43:04.827374 2018] [authz_core:error] [pid 6417] [client 127.0.0.1:51115] AH01630: client denied by server configuration: /Users/ilyatorlin/Sites/api.testwork.home/favicon.ico, referer: http://api.testwork.home/
+[Wed Jun 13 20:53:29.604011 2018] [authz_core:error] [pid 6481] [client ::1:51158] AH01630: client denied by server configuration: /Users/ilyatorlin/Sites/api.testwork.home/
+[Wed Jun 13 20:53:33.506804 2018] [authz_core:error] [pid 6481] [client ::1:51158] AH01630: client denied by server configuration: /Users/ilyatorlin/Sites/api.testwork.home/
+[Wed Jun 13 20:53:43.366736 2018] [authz_core:error] [pid 6480] [client ::1:51166] AH01630: client denied by server configuration: /Users/ilyatorlin/Sites/api.testwork.home/testwork.home
+[Wed Jun 13 20:54:04.619534 2018] [authz_core:error] [pid 6481] [client ::1:51171] AH01630: client denied by server configuration: /Users/ilyatorlin/Sites/api.testwork.home/
