@@ -18,7 +18,7 @@ echo "Hello From Sites Folder! testwork.home";
    $.ajax({
      type: $form.attr('method'),
      headers:{'Authorization' : 'Bearer nkQxsD5eS6qcpqIx'},
-     url: 'http://api.testwork.home/files/post',
+     url: 'http://api.testwork.home/files/post/',
      contentType: false, // важно - убираем форматирование данных по умолчанию
       processData: false,
      //data: $form.serialize()

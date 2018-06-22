@@ -71,11 +71,16 @@ class FilesController extends ActiveController
         $content = null;
         $me = \Yii::$app->user->identity;
         $file = \app\models\Files::findOne($id);
+
+        if (empty($file)) {
+             throw new \yii\web\ForbiddenHttpException(sprintf('Файл не найден'));
+        }
+
         if (!($file->creator === $me->id)) {
              throw new \yii\web\ForbiddenHttpException(sprintf('Вы не являетесь владельцем файла'));
         }
         $fileExtention = pathinfo($file->path)['extension'];
-        if ( in_array($fileExtention,array('doc','txt','rtf')) ) {
+        if (in_array($fileExtention,array('doc','txt','rtf')) ) {
              $content = file_get_contents($file->path);
         }
         return array('file' => $file,
@@ -135,7 +140,8 @@ class FilesController extends ActiveController
           return $files;
      }
 
-     public function actionPutcreate(){
+     public function actionPutcreate()
+     {
           $filename = \Yii::$app->params['defaultPath'];
           $filename .= (isset($_GET['filename'])) ? $_GET['filename'] : 'unknow.dat';
 
