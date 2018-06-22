@@ -107,9 +107,7 @@ class FilesController extends ActiveController
           // получаем текущего пользователя
           $me = \Yii::$app->user->identity;
           // получаем переданные файлы
-          \Yii::trace($params);
           $files = \yii\web\UploadedFile::getInstancesByName('file');
-          \Yii::trace($files);
           foreach ($files as $file) {
                if(!in_array($file->getExtension(),\Yii::$app->params['extensions']))
                     throw new \yii\web\ForbiddenHttpException(sprintf('Файл с таким расширением нельзя загрузить'));
@@ -117,9 +115,8 @@ class FilesController extends ActiveController
                     throw new \yii\web\ForbiddenHttpException(sprintf('Размер файла привышает допустимый'));
                $filename = $file->getBaseName() .'.'. $file->getExtension();
                $dirName = \Yii::$app->params['defaultPath'] . $filename;
-               \Yii::trace(\Yii::$app->params);
-               $temp_path = \Yii::$app->params['defaultPath'] . $filename;
-               $file->saveAs($temp_path, true);
+
+               $file->saveAs($dirName, true);
                $newfile = new \app\models\Files;
                // заполняем имя файла
                $newfile->name = $file->getBaseName();
@@ -140,26 +137,28 @@ class FilesController extends ActiveController
 
      public function actionPutcreate(){
           $filename = \Yii::$app->params['defaultPath'];
-          \Yii::trace($_PUT);
-          \Yii::trace(\Yii::$app->params['MAX_FILE_SIZE']);
           $filename .= (isset($_GET['filename'])) ? $_GET['filename'] : 'unknow.dat';
+
           if (file_exists($filename)) {
                throw new \yii\web\ForbiddenHttpException(sprintf('Файл с таким именем существует'));
           }
+
           $putdata = fopen("php://input", "r");
           $fp = fopen($filename, "w");
           while ($data = fread($putdata, 1024))
                fwrite($fp, $data);
           fclose($fp);
           fclose($putdata);
+
           if(!file_exists($filename)){
                throw new \yii\web\ForbiddenHttpException(sprintf('Не удалось скопировать файл'));
           }
-          \Yii::trace(filesize($filename));
+
           if( filesize($filename) > \Yii::$app->params['MAX_FILE_SIZE'] ){
                unlink($filename);
                throw new \yii\web\ForbiddenHttpException(sprintf('Размер файла привышает допустимый'));
           }
+
           $me = \Yii::$app->user->identity;
           $dirName = $filename;
           $newfile = new \app\models\Files;
@@ -216,13 +215,15 @@ class FilesController extends ActiveController
         $id = $params['id'];
         $me = \Yii::$app->user->identity;
         $file = \app\models\Files::findOne($id);
+
         if (empty($file)) {
             throw new \yii\web\ForbiddenHttpException(sprintf('Такого файла не существует'));
         }
+
         if (!($file->creator === $me->id)) {
              throw new \yii\web\ForbiddenHttpException(sprintf('Вы не являетесь владельцем файла'));
         }
-        \Yii::trace($params);
+
         if(empty($params['content']))
           return array('message' => 'контент пустой');
 
@@ -235,7 +236,7 @@ class FilesController extends ActiveController
     {
        $params = \Yii::$app->request->post();
        $me = \Yii::$app->user->identity;
-       \Yii::trace($params);
+
        if (empty($params['filename'])) {
             throw new \yii\web\ForbiddenHttpException(sprintf('Не задано имя'));
        }

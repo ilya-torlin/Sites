@@ -74,7 +74,6 @@ class UsersController extends ActiveController
               throw new \yii\web\ForbiddenHttpException(sprintf('Пользователь с таким логином уже существует'));
          }
          $me = \Yii::$app->user->identity;
-         //\Yii::trace($me);
          $user = new \app\models\Users;
          $user->login = strip_tags($params['login']);
          $user->pass = \Yii::$app->getSecurity()->generatePasswordHash($params['pass']);
