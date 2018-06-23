@@ -106,7 +106,7 @@ class FilesController extends ActiveController
 
     /**
      * Creates a new Files model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
+     * If creation is successful, return created file model.
      * Allowed extentions 'doc','docx','xls','xlsx','jpg','jpeg','pdf','png','txt','rtf'
      * @param file $file
      * @return mixed
@@ -152,6 +152,15 @@ class FilesController extends ActiveController
           return $added_files;
      }
 
+     /**
+      * Creates a new Files model by PUT.
+      * If creation is successful, return created file model.
+      * Allowed extentions 'doc','docx','xls','xlsx','jpg','jpeg','pdf','png','txt','rtf'
+      * @param file $file
+      * @param string $filename
+      * @return mixed
+      * @throws NotFoundHttpException if the model cannot be found
+      */
      public function actionPutcreate()
      {
           $filename = \Yii::$app->params['defaultPath'];
@@ -198,7 +207,7 @@ class FilesController extends ActiveController
 
      /**
      * Deletes an existing Files model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * If deletion is successful, return message.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -222,7 +231,7 @@ class FilesController extends ActiveController
 
     /**
      * Update an existing Files model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * If deletion is successful, return message.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -250,6 +259,14 @@ class FilesController extends ActiveController
         return array('message' => 'Файл успешно обновлен');
     }
 
+    /**
+    * Create Files model from request.
+    * If deletion is successful, return created file model.
+    * @param string $filename
+    * @param string $content
+    * @return mixed
+    * @throws NotFoundHttpException if the model cannot be found
+    */
     public function actionCreatepostfile()
     {
        $params = \Yii::$app->request->post();

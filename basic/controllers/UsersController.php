@@ -59,7 +59,10 @@ class UsersController extends ActiveController
 
     /**
      * Add User. Password saved as hash, token is genering by random string.
-     * @return integer
+     * @param string $login
+     * @param string $pass
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionSave()
     {
@@ -84,8 +87,10 @@ class UsersController extends ActiveController
     }
 
     /**
-     * Delete Users. Return null
+     * Delete Users. Return success message
+     * @param integer $id
      * @return null
+     * @throws NotFoundHttpException if the model cannot be found
     **/
     public function actionDelete($id)
     {
@@ -97,7 +102,7 @@ class UsersController extends ActiveController
          if (empty($deletedUser)) {
               throw new \yii\web\ForbiddenHttpException(sprintf('Пользователь с таким id не найден'));
          }
-         
+
          $deletedUser->delete();
          return array('message' => 'Пользователь удален');
 
