@@ -1,10 +1,3 @@
-<?php
-$con = new mysqli("127.0.0.1", "root", "wdaS7zCd", "first_db");
-$message = $con->query("SELECT content FROM content_table")->fetch_object()->content;
-$con->close();
-echo "$message <br/>";
-echo "Hello From Sites Folder! testwork.home";
-?>
 <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
