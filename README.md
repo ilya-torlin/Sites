@@ -10,9 +10,7 @@ HTTP API сервис для работы с файловой системой
 Доступ ко все информации происходит через БД, в который хранятся пользователи системы, информация о добавленных файлах и связь файлов и  пользователей.
 
 **Структура проекта**
-assets/             contains assets definition
-commands/           contains console commands (controllers)
-config/             contains application configurations
-api.testwork.home/       содержит точку входа в приложение index.php
-basic/                   содержит логику работы (Yii2 basic app)
-testwork.home/           содержит страницу для теста index.php
+
+- api.testwork.home/       содержит точку входа в приложение index.php
+- basic/                   содержит логику работы (Yii2 basic app)
+- testwork.home/           содержит страницу для теста index.php
