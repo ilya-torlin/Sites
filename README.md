@@ -108,4 +108,110 @@ Exception: ForbiddenHttpException
 ]
 ```
 
-#### Работа с файлами
+### Работа с файлами
+
+***Список файлов***
+
+request: http://api.testwork.home/files
+
+method: GET
+
+params: нет
+
+return: json строка со списком файлов, либо сообщение, что в директории нет файлов
+Exception: ForbiddenHttpException
+
+пример ответа
+
+```php
+[
+    {
+        "id": 15,
+        "name": "file123",
+        "path": "/Users/ilyatorlin/Sites/basic/uploads/file123.txt",
+        "meta": "{\"size\":12,\"modified\":1529682839,\"path\":\"\\/Users\\/ilyatorlin\\/Sites\\/basic\\/uploads\\/file123.txt\",\"is_dir\":false,\"mime_type\":\"text\\/plain\"}",
+        "size": 12,
+        "created": "2018-06-22 15:53:59",
+        "creator": 4
+    },
+    {
+        "id": 16,
+        "name": "3.txt",
+        "path": "/Users/ilyatorlin/Sites/basic/uploads/3.txt",
+        "meta": "{\"size\":11,\"modified\":1529703332,\"path\":\"\\/Users\\/ilyatorlin\\/Sites\\/basic\\/uploads\\/3.txt\",\"is_dir\":false,\"mime_type\":\"text\\/plain\"}",
+        "size": 11,
+        "created": "2018-06-22 21:35:32",
+        "creator": 4
+    }
+]
+```
+
+***Просмотр информации файла***
+
+request: http://api.testwork.home/files/<id>
+
+method: GET
+
+params:
+- id - идентификатор файла в системе
+
+return: json строка с объектом файла, в поле content - находится содержимое файла
+Exception: ForbiddenHttpException
+
+пример ответа
+
+```php
+{
+    "file": {
+        "id": 16,
+        "name": "3.txt",
+        "path": "/Users/ilyatorlin/Sites/basic/uploads/3.txt",
+        "meta": "{\"size\":11,\"modified\":1529703332,\"path\":\"\\/Users\\/ilyatorlin\\/Sites\\/basic\\/uploads\\/3.txt\",\"is_dir\":false,\"mime_type\":\"text\\/plain\"}",
+        "size": 11,
+        "created": "2018-06-22 21:35:32",
+        "creator": 4
+    },
+    "content": "yjdsq yjdsq"
+}
+```
+
+***Удаление файла***
+
+request: http://api.testwork.home/files/<id>
+
+method: DELETE
+
+params:
+- id - идентификатор файла в системе
+
+return: json строка с сообщением, что файл удален файла
+Exception: ForbiddenHttpException
+
+пример ответа
+
+```php
+{
+     "message": "Файл успешно удален"
+}
+```
+
+***Обновление содержимого файла***
+
+request: http://api.testwork.home/files/update
+
+method: POST
+
+params:
+- id - идентификатор файла в системе
+- content - обновленное содержимое файла
+
+return: json строка с сообщением, что файл удален файла
+Exception: ForbiddenHttpException
+
+пример ответа
+
+```php
+{
+     "message": "Файл успешно обновлен"
+}
+```

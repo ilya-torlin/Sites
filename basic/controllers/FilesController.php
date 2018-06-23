@@ -240,7 +240,7 @@ class FilesController extends ActiveController
 
         file_put_contents($file->path, $params['content']);
 
-        return array('message' => 'Файл успешно удален');
+        return array('message' => 'Файл успешно обновлен');
     }
 
     public function actionCreatepostfile()
