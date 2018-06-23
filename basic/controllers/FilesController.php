@@ -41,7 +41,8 @@ class FilesController extends ActiveController
         return $behaviors;
     }
 
-    public function actions() {
+    public function actions()
+    {
        $actions = parent::actions();
        unset($actions['create'], $actions['update'], $actions['index'], $actions['view'], $actions['delete']);
        return $actions;
@@ -79,16 +80,20 @@ class FilesController extends ActiveController
         if (!($file->creator === $me->id)) {
              throw new \yii\web\ForbiddenHttpException(sprintf('Вы не являетесь владельцем файла'));
         }
+
         $fileExtention = pathinfo($file->path)['extension'];
+
         if (in_array($fileExtention,array('doc','txt','rtf')) ) {
              $content = file_get_contents($file->path);
         }
+
         return array('file' => $file,
                     'content' => $content,
                );
     }
 
-    public function getFileMeta($file){
+    public function getFileMeta($file)
+    {
          return array(
               "size" => filesize($file),
               "modified" => filemtime($file),

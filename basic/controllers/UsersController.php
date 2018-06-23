@@ -40,7 +40,8 @@ class UsersController extends ActiveController
         return $behaviors;
     }
 
-    public function actions() {
+    public function actions()
+    {
        $actions = parent::actions();
        unset($actions['create'], $actions['update'], $actions['index'], $actions['view'], $actions['delete']);
        return $actions;
@@ -86,14 +87,17 @@ class UsersController extends ActiveController
      * Delete Users. Return null
      * @return null
     **/
-    public function actionDelete($id){
+    public function actionDelete($id)
+    {
          if (empty($id)) {
               throw new \yii\web\ForbiddenHttpException(sprintf('Пользователь с таким id не найден'));
          }
+
          $deletedUser = \app\models\Users::findOne($id);
          if (empty($deletedUser)) {
               throw new \yii\web\ForbiddenHttpException(sprintf('Пользователь с таким id не найден'));
          }
+         
          $deletedUser->delete();
          return array('message' => 'Пользователь удален');
 
