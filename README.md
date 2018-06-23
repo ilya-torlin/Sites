@@ -47,12 +47,63 @@ params:
 - pass
 
 return: new User (данные логина и токена доступа, пароль записывется в базу как hash, токен записываются как рандомная строка)  
+Exception: ForbiddenHttpException
 
-пример
+пример ответа
 
 ```php
 {
     "login": "user1",
     "token": "FCGlqZtqTkaEhIJX"
 }
+```
+
+***Удаление пользователя***
+
+Удаляем пользователя по <id>
+
+request: http://api.testwork.home/users/<id>
+
+method: DELETE
+
+params:
+- id
+
+return: json строка с сообщением, что пользователь удален
+Exception: ForbiddenHttpException
+
+пример ответа
+
+```php
+{
+    "message": "Пользователь удален"
+}
+```
+
+***Список пользователей***
+
+Получаем список всех пользователей в приложении
+
+request: http://api.testwork.home/users/
+
+method:  GET
+
+params:  нет
+
+return: json строка со списком пользователей
+Exception: ForbiddenHttpException
+
+пример ответа
+
+```php
+[
+    {
+        "id": 4,
+        "login": "user"
+    },
+    {
+        "id": 7,
+        "login": "user1"
+    }
+]
 ```
