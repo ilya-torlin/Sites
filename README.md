@@ -49,8 +49,7 @@ params:
 return: new User (данные логина и токена доступа, пароль записывется в базу как hash, токен записываются как рандомная строка)  
 Exception: ForbiddenHttpException
 
-пример ответа
-
+пример ответа:
 ```php
 {
     "login": "user1",
@@ -72,8 +71,7 @@ params:
 return: json строка с сообщением, что пользователь удален
 Exception: ForbiddenHttpException
 
-пример ответа
-
+пример ответа:
 ```php
 {
     "message": "Пользователь удален"
@@ -93,8 +91,7 @@ params:  нет
 return: json строка со списком пользователей
 Exception: ForbiddenHttpException
 
-пример ответа
-
+пример ответа:
 ```php
 [
     {
@@ -121,8 +118,7 @@ params: нет
 return: json строка со списком файлов, либо сообщение, что в директории нет файлов
 Exception: ForbiddenHttpException
 
-пример ответа
-
+пример ответа:
 ```php
 [
     {
@@ -158,8 +154,7 @@ params:
 return: json строка с объектом файла, в поле content - находится содержимое файла
 Exception: ForbiddenHttpException
 
-пример ответа
-
+пример ответа:
 ```php
 {
     "file": {
@@ -187,8 +182,7 @@ params:
 return: json строка с сообщением, что файл удален файла
 Exception: ForbiddenHttpException
 
-пример ответа
-
+пример ответа:
 ```php
 {
      "message": "Файл успешно удален"
@@ -208,8 +202,7 @@ params:
 return: json строка с сообщением, что файл удален файла
 Exception: ForbiddenHttpException
 
-пример ответа
-
+пример ответа:
 ```php
 {
      "message": "Файл успешно обновлен"
