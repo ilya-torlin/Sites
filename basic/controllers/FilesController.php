@@ -54,7 +54,8 @@ class FilesController extends ActiveController
      */
     public function actionIndex()
     {
-        $files = \app\models\Files::find()->all();
+        $me = \Yii::$app->user->identity;
+        $files = \app\models\Files::find()->where(['creator' => $me->id])->all();
         if (empty($files)) {
              return array('message' => 'В директории нет файлов');
         }
@@ -126,6 +127,10 @@ class FilesController extends ActiveController
                     throw new \yii\web\ForbiddenHttpException(sprintf('Размер файла привышает допустимый'));
                $filename = $file->getBaseName() .'.'. $file->getExtension();
                $dirName = \Yii::$app->params['defaultPath'] . $filename;
+
+               if (file_exists($dirName)) {
+                    throw new \yii\web\ForbiddenHttpException(sprintf('Файл с таким именем существует'));
+               }
 
                $file->saveAs($dirName, true);
                $newfile = new \app\models\Files;
