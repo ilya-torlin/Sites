@@ -118,6 +118,7 @@ class FilesController extends ActiveController
           $me = \Yii::$app->user->identity;
           // получаем переданные файлы
           $files = \yii\web\UploadedFile::getInstancesByName('file');
+          $added_files = array();
           foreach ($files as $file) {
                if(!in_array($file->getExtension(),\Yii::$app->params['extensions']))
                     throw new \yii\web\ForbiddenHttpException(sprintf('Файл с таким расширением нельзя загрузить'));
@@ -129,20 +130,21 @@ class FilesController extends ActiveController
                $file->saveAs($dirName, true);
                $newfile = new \app\models\Files;
                // заполняем имя файла
-               $newfile->name = $file->getBaseName();
+               $newfile->name = $file->getBaseName() .'.'. $file->getExtension();
                $newfile->path = $dirName;
                $newfile->size = $file->size;
                $newfile->created = date("Y-m-d H:i:s");
                $newfile->creator = $me->id;
                $newfile->meta = json_encode($this->getFileMeta(\Yii::$app->params['defaultPath'].$filename));
                $newfile->save();
+               $added_files[] = $newfile;
                // создаем связь с проектом
                $UserFile = new \app\models\UserFile();
                $UserFile->file_id = $newfile->id;
                $UserFile->user_id = $me->id;
                $UserFile->save();
           }
-          return $files;
+          return $added_files;
      }
 
      public function actionPutcreate()

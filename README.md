@@ -208,3 +208,89 @@ Exception: ForbiddenHttpException
      "message": "Файл успешно обновлен"
 }
 ```
+
+***Создание файла POST (передача целого файла, например изображение)***
+
+Самы простой способ передать файл на сервер, например, через форму (поле input type=file)
+
+request: http://api.testwork.home/files/post
+
+method: POST
+
+params:
+- file - сам файл которые передается в массиве $_FILES
+
+return: json c созданным файлом
+Exception: ForbiddenHttpException
+
+пример ответа:
+```php
+[
+     {
+          "name":"file1",
+          "path":"/Users/ilyatorlin/Sites/basic/uploads/file1.txt",
+          "size":12,
+          "created":"2018-06-23 07:27:46",
+          "creator":4,
+          "meta":"{\"size\":12,\"modified\":1529738866,\"path\":\"\\/Users\\/ilyatorlin\\/Sites\\/basic\\/uploads\\/file1.txt\",\"is_dir\":false,\"mime_type\":\"text\\/plain\"}",
+          "id":17
+     }
+]
+```
+
+
+***Создание/Закачивание файла PUT (передача целого файла, например изображение)***
+
+передача файла в приложение, в котором мы последовательно считываем данные блоками по 1024б и записываем в файл с именем filename на сервере
+
+request: http://api.testwork.home/files/put?filename=file1.jpg
+
+method: PUT
+
+params:
+- filename - имя файла, под которым мы его сохраним на сервере
+
+return: json c созданным файлом
+Exception: ForbiddenHttpException
+
+пример ответа:
+```php
+     {
+          "name":"file1.jpg",
+          "path":"/Users/ilyatorlin/Sites/basic/uploads/file1.jpg",
+          "size":12,
+          "created":"2018-06-23 07:27:46",
+          "creator":4,
+          "meta":"{\"size\":12,\"modified\":1529738866,\"path\":\"\\/Users\\/ilyatorlin\\/Sites\\/basic\\/uploads\\/file1.jpg\",\"is_dir\":false,\"mime_type\":\"image\\/jpg\"}",
+          "id":17
+     }
+```
+
+
+***Создание файла POST (создание файла из параметров в запросе)***
+
+создание файла (например, текстового) из параметров в запросе и сохранение его на сервере
+
+request: http://api.testwork.home/files/put?filename=file1.jpg
+
+method: POST
+
+params:
+- filename - имя файла, под которым мы его сохраним на сервере
+- content - содержимое файла (строка)
+
+return: json c созданным файлом
+Exception: ForbiddenHttpException
+
+пример ответа:
+```php
+{
+    "name": "3.txt",
+    "path": "/Users/ilyatorlin/Sites/basic/uploads/3.txt",
+    "size": 11,
+    "created": "2018-06-22 21:35:32",
+    "creator": 4,
+    "meta": "{\"size\":11,\"modified\":1529703332,\"path\":\"\\/Users\\/ilyatorlin\\/Sites\\/basic\\/uploads\\/3.txt\",\"is_dir\":false,\"mime_type\":\"text\\/plain\"}",
+    "id": 16
+}
+```
